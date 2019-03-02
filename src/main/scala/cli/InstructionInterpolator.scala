@@ -22,6 +22,7 @@ class InstructionInterpolator(env: scala.collection.Map[String, String]) {
         case "exit" :: args => ExitCommand(args.toArray)
         case "pwd" :: args => PwdCommand(args.toArray)
         case "wc" :: args => WcCommand(args.toArray)
+        case "grep" :: args => GrepCommand(args.toArray, System.err)
         case name :: args => ExternalCommand(name, args.toArray)
         case _ => NoopCommand
       }
