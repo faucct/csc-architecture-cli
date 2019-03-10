@@ -20,4 +20,11 @@ class LineParserTest extends FunSuite {
     )(parser.first)
   }
 
+  test("echo \"hello ' world\"") {
+    val parser = LineParser(new CharSequenceReader("echo \"hello ' world\"\n"))
+    assertResult(
+      Line(List(Command(List(Text.Raw("echo "), Text.DoubleQuoted(List(Text.Raw("hello ' world")))))))
+    )(parser.first)
+  }
+
 }
