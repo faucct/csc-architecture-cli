@@ -26,7 +26,7 @@ object LineParser {
     }
 
     private def identifier = {
-      letter ~ rep(letter | digit) <~ guard(not(letter | digit)) ^^ {
+      '?' ^^ (_.toString) | letter ~ rep(letter | digit) <~ guard(not(letter | digit)) ^^ {
         case letter ~ rest => letter + rest.mkString
       }
     }

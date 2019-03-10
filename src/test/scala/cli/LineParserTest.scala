@@ -27,4 +27,11 @@ class LineParserTest extends FunSuite {
     )(parser.first)
   }
 
+  test("echo $?") {
+    val parser = LineParser(new CharSequenceReader("echo $?\n"))
+    assertResult(
+      Line(List(Command(List(Text.Raw("echo "), Text.Interpolated("?")))))
+    )(parser.first)
+  }
+
 }

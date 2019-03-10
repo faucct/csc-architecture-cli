@@ -13,7 +13,12 @@ object Application {
       LineParser(new PagedSeqReader(PagedSeq.fromReader(new InputStreamReader(System.in)))).first match {
         case LineParser.Scanners.ErrorToken(message) => println(message)
         case LineParser.Scanners.Line(instructions) =>
-          instructions.foreach(new InstructionInterpolator(session.env).apply(_).run(session, None, System.out.write(_)))
+          instructions.foreach(instruction =>
+            session.env.put(
+              "?",
+              new InstructionInterpolator(session.env).apply(instruction).run(session, None, System.out.write(_)).toString,
+            )
+          )
       }
     }
   }
