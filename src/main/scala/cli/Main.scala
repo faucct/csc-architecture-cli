@@ -5,6 +5,7 @@ import java.io.InputStreamReader
 import scala.collection.mutable
 import scala.util.parsing.input.{PagedSeq, PagedSeqReader}
 
+// Main loop.
 object Main {
   def main(args: Array[String]): Unit = {
     val inputProcessor = new InputProcessor(

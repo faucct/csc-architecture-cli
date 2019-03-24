@@ -4,6 +4,8 @@ import scala.util.parsing.combinator._
 import scala.util.parsing.input.Reader
 import InstructionsToInterpolate._
 
+// Is responsible for parsing user input.
+// Does not perform interpolation.
 object LineParser {
   def apply(reader: Reader[Char]) = new Scanners.Scanner(reader)
 

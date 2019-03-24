@@ -4,6 +4,7 @@ import java.io.{OutputStream, Reader}
 
 import scala.util.parsing.input.{PagedSeq, PagedSeqReader}
 
+// Reads and processes an unseparable batch of commands.
 class InputProcessor(session: Session) {
   def apply(input: Reader, output: OutputStream): Unit = {
     LineParser(new PagedSeqReader(PagedSeq.fromReader(input))).first match {

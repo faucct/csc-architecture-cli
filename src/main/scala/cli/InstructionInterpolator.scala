@@ -2,6 +2,7 @@ package cli
 
 import InstructionsToInterpolate._
 
+// Interpolates environment variables into LineParser output.
 class InstructionInterpolator(env: scala.collection.Map[String, String]) {
   private val interpolate: PartialFunction[Text, List[String]] = {
     case Text.Raw(text) => words(text)
