@@ -1,7 +1,8 @@
-package cli
+package cli.commands
 
 import java.io.{ByteArrayOutputStream, File}
 
+import cli.Session
 import org.scalatest.FunSuite
 
 import scala.collection.mutable

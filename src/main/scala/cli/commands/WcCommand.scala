@@ -1,6 +1,8 @@
-package cli
+package cli.commands
 
-import java.io._
+import java.io.{BufferedInputStream, File, FileInputStream, FileNotFoundException}
+
+import cli.Session
 
 import scala.util.control.NonFatal
 

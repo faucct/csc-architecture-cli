@@ -1,6 +1,8 @@
-package cli
+package cli.commands
 
 import java.io.{BufferedInputStream, File}
+
+import cli.Session
 
 case class ExternalCommand(name: String, args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {

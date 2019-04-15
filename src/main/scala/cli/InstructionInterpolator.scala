@@ -1,6 +1,7 @@
 package cli
 
 import InstructionsToInterpolate._
+import cli.commands._
 
 // Interpolates environment variables into LineParser output.
 class InstructionInterpolator(env: scala.collection.Map[String, String]) {
@@ -13,7 +14,7 @@ class InstructionInterpolator(env: scala.collection.Map[String, String]) {
 
   private def words(text: String) = text.split(' ').toList.filterNot(_.isEmpty)
 
-  def apply: PartialFunction[Instruction, Command] = {
+  def apply: PartialFunction[Instruction, commands.Command] = {
     case Assignment(key, texts) => AssignmentCommand(key, texts.flatMap(interpolate).mkString)
     case Command(texts) =>
       texts.flatMap(interpolate) match {

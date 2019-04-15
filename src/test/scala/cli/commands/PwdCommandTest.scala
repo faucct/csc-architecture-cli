@@ -1,19 +1,18 @@
-package cli
+package cli.commands
 
 import java.io.ByteArrayOutputStream
 
+import cli.Session
 import org.scalatest.FunSuite
 
 import scala.collection.mutable
 
-class AssignmentCommandTest extends FunSuite {
+class PwdCommandTest extends FunSuite {
 
   test("run") {
     val stream = new ByteArrayOutputStream()
-    val session = this.session
-    AssignmentCommand("foo", "bar").run(session, None, stream.write(_))
-    assertResult("")(stream.toString)
-    assertResult(Some("bar"))(session.env.get("foo"))
+    PwdCommand(Array()).run(session, None, stream.write(_))
+    assertResult(s"${System.getProperty("user.dir")}${System.getProperty("line.separator")}")(stream.toString)
   }
 
   private def session = {
@@ -21,4 +20,5 @@ class AssignmentCommandTest extends FunSuite {
       override def exit(status: Integer): Unit = {}
     }
   }
+
 }
