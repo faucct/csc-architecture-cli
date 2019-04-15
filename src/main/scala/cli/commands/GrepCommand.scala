@@ -82,11 +82,13 @@ case class GrepCommand(args: Array[String], errorOutput: PrintStream) extends Co
       case "-i" :: rest => parseArgs(rest).map(pair => pair.copy(_2 = pair._2.copy(ignoreCase = true)))
       case "-A" :: numberString :: rest =>
         (try {
-          Some(Integer.parseInt(numberString))
+          val integer = Integer.parseInt(numberString)
+          if (integer < 0) None else Some(integer)
         } catch {
-          case _: NumberFormatException =>
-            errorOutput.println("grep: option requires an integer argument -- A")
-            None
+          case _: NumberFormatException => None
+        }).orElse({
+          errorOutput.println("grep: option requires a non-negative integer argument -- A")
+          None
         }).flatMap {
           number => parseArgs(rest).map(pair => pair.copy(_2 = pair._2.copy(afterContext = number)))
         }

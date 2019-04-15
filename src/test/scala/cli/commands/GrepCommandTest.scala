@@ -1,11 +1,10 @@
 package cli.commands
 
-import java.io.ByteArrayOutputStream
+import java.io.{ByteArrayOutputStream, PrintStream}
 
 import org.scalatest.FunSuite
 
 import scala.collection.mutable
-
 import cli.Session
 
 class GrepCommandTest extends FunSuite {
@@ -32,6 +31,16 @@ class GrepCommandTest extends FunSuite {
     val builder = new ByteArrayOutputStream()
     assertResult(0)(command.run(session, Some(output => "foo\nbar\n".getBytes.foreach(output)), builder.write(_)))
     assertResult("foo\nbar\n")(builder.toString)
+  }
+
+  test("testNegativeAfterContext") {
+    val errorOutputStream = new ByteArrayOutputStream()
+    val command = new GrepCommand(Array("-A", "-1", "foo"), new PrintStream(errorOutputStream))
+    val session = new Session(null, mutable.Map.empty, mutable.Map.empty)
+    val builder = new ByteArrayOutputStream()
+
+    assertResult(2)(command.run(session, Some(output => "foo\nbar\n".getBytes.foreach(output)), builder.write(_)))
+    assertResult("grep: option requires a non-negative integer argument -- A\nusage: grep [-iw] [-A num] [pattern] [file ...]\n")(errorOutputStream.toString)
   }
 
 }
