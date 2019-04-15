@@ -1,7 +1,9 @@
-package cli
+package cli.commands
 
 import java.io.File
 import java.nio.file.Paths
+
+import cli.Session
 
 case class CdCommand(args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {

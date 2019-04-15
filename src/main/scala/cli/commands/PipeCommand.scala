@@ -1,4 +1,6 @@
-package cli
+package cli.commands
+
+import cli.Session
 
 case class PipeCommand(from: Command, to: Command) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {

@@ -1,4 +1,6 @@
-package cli
+package cli.commands
+
+import cli.Session
 
 case class AssignmentCommand(key: String, value: String) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {

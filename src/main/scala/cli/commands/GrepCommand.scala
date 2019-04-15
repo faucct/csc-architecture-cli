@@ -1,7 +1,9 @@
-package cli
+package cli.commands
 
-import java.io._
+import java.io.{ByteArrayOutputStream, File, FileNotFoundException, PrintStream}
 import java.util.regex.Pattern
+
+import cli.{Session, WithFileInput}
 
 case class GrepCommand(args: Array[String], errorOutput: PrintStream) extends Command {
 

@@ -1,4 +1,6 @@
-package cli
+package cli.commands
+
+import cli.Session
 
 case class ExitCommand(args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
@@ -9,7 +11,7 @@ case class ExitCommand(args: Array[String]) extends Command {
           args(0).toInt
         } catch {
           case _: NumberFormatException =>
-            s"-cli: exit: $args(0): numeric argument required${System.getProperty("line.separator")}".getBytes
+            s"-cli: exit: ${args(0)}: numeric argument required${System.getProperty("line.separator")}".getBytes
               .foreach(output)
             return 255
         }
@@ -19,7 +21,7 @@ case class ExitCommand(args: Array[String]) extends Command {
     }
 
     if (input.isEmpty)
-      System.exit(status)
+      session.exit(status)
     status
   }
 }
