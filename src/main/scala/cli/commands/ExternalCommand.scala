@@ -4,6 +4,11 @@ import java.io.{BufferedInputStream, File}
 
 import cli.Session
 
+/**
+  * Runs an external command. Supports pipe input (except STDIN) and output.
+  * @param name If relative it is being searched for in $PATH.
+  * @param args Args are being proxied.
+  */
 case class ExternalCommand(name: String, args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
     val process = Runtime.getRuntime.exec(

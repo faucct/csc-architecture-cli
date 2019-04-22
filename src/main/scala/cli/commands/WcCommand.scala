@@ -4,6 +4,10 @@ import java.io.{File, FileNotFoundException}
 
 import cli.{Session, WithFileInput}
 
+/**
+  * Counts text lines words and chars in argument files if any or STDIN.
+  * @param args files to read from
+  */
 case class WcCommand(args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
     if (args.isEmpty) {

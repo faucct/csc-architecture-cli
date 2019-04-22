@@ -1,5 +1,8 @@
 package cli
 
+/**
+  * An intermediate representation of user input between [[LineParser]] and [[InstructionInterpolator]]
+  */
 object InstructionsToInterpolate {
   sealed trait Instruction
 

@@ -5,6 +5,10 @@ import java.nio.file.Paths
 
 import cli.Session
 
+/**
+  * Changes current working directory to the first argument or $HOME.
+  * @param args
+  */
 case class CdCommand(args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
     session.workingDirectory =

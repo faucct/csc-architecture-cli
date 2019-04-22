@@ -2,6 +2,10 @@ package cli.commands
 
 import cli.Session
 
+/**
+  * Exits with first argument as exit code or 0 if none.
+  * @param args exit code
+  */
 case class ExitCommand(args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
     val status: Int = args.length match {

@@ -4,6 +4,9 @@ import java.io.{BufferedInputStream, File, FileInputStream}
 
 import scala.util.control.NonFatal
 
+/**
+  * Encapsulates reading from files.
+  */
 object WithFileInput {
   def apply(file: File, output: Byte => Unit) {
     withResource(new BufferedInputStream(new FileInputStream(file)))(stream => {
@@ -15,7 +18,9 @@ object WithFileInput {
     })
   }
 
-  // @see https://medium.com/@dkomanov/scala-try-with-resources-735baad0fd7d
+  /**
+    * @see https://medium.com/@dkomanov/scala-try-with-resources-735baad0fd7d
+    */
   private def withResource[T <: AutoCloseable, V](r: => T)(f: T => V): V = {
     val resource: T = r
     require(resource != null, "resource is null")

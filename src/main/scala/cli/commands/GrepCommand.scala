@@ -5,6 +5,11 @@ import java.util.regex.Pattern
 
 import cli.{Session, WithFileInput}
 
+/**
+  * Searches for text in argument files if any or STDIN. Uses Java regular expressions.
+  * @param args files to read from
+  * @param errorOutput
+  */
 case class GrepCommand(args: Array[String], errorOutput: PrintStream) extends Command {
 
   private case class Options(

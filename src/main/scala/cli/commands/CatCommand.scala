@@ -3,6 +3,10 @@ package cli.commands
 import java.io._
 import cli.{Session, WithFileInput}
 
+/**
+  * Concats output from argument files. Reads from STDIN if there are none.
+  * @param args files to read from
+  */
 case class CatCommand(args: Array[String]) extends Command {
   override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
     if (args.isEmpty) {
