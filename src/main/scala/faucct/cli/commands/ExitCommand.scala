@@ -1,0 +1,31 @@
+package faucct.cli.commands
+
+import faucct.cli.Session
+
+/**
+  * Exits with first argument as exit code or 0 if none.
+  * @param args exit code
+  */
+case class ExitCommand(args: Array[String]) extends Command {
+  override def run(session: Session, input: Option[(Byte => Unit) => Unit], output: Byte => Unit): Int = {
+    val status: Int = args.length match {
+      case 0 => 0
+      case 1 =>
+        try {
+          args(0).toInt
+        } catch {
+          case _: NumberFormatException =>
+            s"-cli: exit: ${args(0)}: numeric argument required${System.getProperty("line.separator")}".getBytes
+              .foreach(output)
+            return 255
+        }
+      case _ =>
+        s"-cli: exit: too many arguments${System.getProperty("line.separator")}".getBytes.foreach(output)
+        return 1
+    }
+
+    if (input.isEmpty)
+      session.exit(status)
+    status
+  }
+}
